@@ -13,6 +13,12 @@ const PATHS = {
 
 const common = {
   entry: PATHS.app,
+
+  // '' is needed to allow imports without an extension
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+  },
+
   output: {
     path: PATHS.build,
     filename: 'bundle.js',
@@ -31,6 +37,11 @@ const common = {
       }
     ],
     loaders: [
+      {
+        test: /\.jsx?$/,
+        loaders: ['babel'],
+        include: PATHS.app,
+      },
       {
         test: /\.css$/,
         loaders: ['style', 'css'],
