@@ -11,17 +11,29 @@ const PATHS = {
   build: path.join(__dirname, 'build'),
 };
 
+
+process.env.BABEL_ENV = TARGET;
 const common = {
   entry: PATHS.app,
+
+  // '' is needed to allow imports without an extension
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+  },
+
   output: {
     path: PATHS.build,
     filename: 'bundle.js',
   },
+
   plugins: [
     new HtmlwebpackPlugin({
+      appMountId: 'app',
+      template: 'node_modules/html-webpack-template/index.html',
       title: 'Kanban app',
     })
   ],
+
   module: {
     preLoaders: [
       {
@@ -31,6 +43,11 @@ const common = {
       }
     ],
     loaders: [
+      {
+        test: /\.jsx?$/,
+        loaders: ['babel'],
+        include: PATHS.app,
+      },
       {
         test: /\.css$/,
         loaders: ['style', 'css'],
