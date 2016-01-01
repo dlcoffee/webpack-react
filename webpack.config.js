@@ -23,11 +23,15 @@ const common = {
     path: PATHS.build,
     filename: 'bundle.js',
   },
+
   plugins: [
     new HtmlwebpackPlugin({
+      appMountId: 'app',
+      template: 'node_modules/html-webpack-template/index.html',
       title: 'Kanban app',
     })
   ],
+
   module: {
     preLoaders: [
       {
