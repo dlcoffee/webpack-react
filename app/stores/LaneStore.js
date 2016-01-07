@@ -6,7 +6,7 @@ import LaneActions from '../actions/LaneActions';
 class LaneStore {
 
   constructor() {
-    this.bindActions(NoteActions);
+    this.bindActions(LaneActions);
 
     this.lanes = [];
   }
@@ -18,7 +18,7 @@ class LaneStore {
     lane.notes = lanes.notes || [];
 
     this.setState({
-      lanes; lanes.concat(lane);
+      lanes: lanes.concat(lane),
     });
   }
 }
